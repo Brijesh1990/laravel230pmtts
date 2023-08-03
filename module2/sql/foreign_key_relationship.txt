@@ -1,0 +1,98 @@
+unique key : unique key is used to provides more than one columns in a tables i.e used to identify uniquely in a table 
+ note :  uk is used to return once time a null values in a tables
+
+       ALTER TABLE `tbl_employees` ADD UNIQUE(`mobile`);
+
+       ALTER TABLE `tbl_employees` ADD UNIQUE(`email`);
+
+
+create table tbl_department 
+(
+depid int PRIMARY KEY AUTO_INCREMENT,
+depname varchar(255)    
+)
+
+
+create table tbl_employees 
+(
+
+    emplid int AUTO_INCREMENT primary key,
+    empname varchar(155),
+    password varchar(155),
+    firstname varchar(155),
+    lastname varchar(155),
+    salary float,
+    mobile bigint,
+    depid int REFERENCES tbl_department(depid),
+    compid int REFERENCES tbl_company(compid)
+    
+    
+
+)
+
+
+TCL  : stands for trasactional control language
+       a) tcl is used to commit data
+          after delete user can seve data there we used commit
+        ex: START TRANSACTION;
+delete from tbl_city where ctid=10;
+commit;
+
+    b) rollback : rollback after delete we can rollback our data 
+
+         note : rollback is not support in mysql 
+         
+        ex: START TRANSACTION;
+select * from tbl_city where ctid=10;
+rollback;
+  
+ SQL join :
+
+       sql join is used to join more than one tables itself and return data if first table of data matched with second table of data.
+
+  types of join : 
+
+   a) inner join 
+   b) join 
+   c) outer join 
+        a) left join 
+        b) right join 
+        c) full join 
+
+    d) cross join 
+
+
+  a) inner join : inner join is used to join first table of matched data with second table of matched data if data matched join tables otherwiser return null values.
+
+     syntax : select firstable.*,columnname from firsttable inner join secondtable name on firsttable.commonfield=secondtable.commonfieild;
+
+     ex:select tbl_employees.*,depname from tbl_employees inner join tbl_department on tbl_employees.depid=tbl_department.depid;
+
+    ex: select tbl_employees.*,depname,compname from tbl_employees inner join tbl_department on tbl_employees.depid=tbl_department.depid inner join tbl_company on tbl_employees.compid=tbl_company.compid;
+
+
+b) join :  join is used to join first table of matched data with second table of matched data if data matched join tables otherwisr return null values.
+
+    
+select tbl_employees.*,depname,compname from tbl_employees join tbl_department on tbl_employees.depid=tbl_department.depid join tbl_company on tbl_employees.compid=tbl_company.compid;
+
+
+c) outer join  
+
+    a) left join : left join is used to join first table of left rows matched data with second table of left rows  if data matched join tables otherwise return null values.
+       
+         ex: select tbl_employees.*,depname,compname from tbl_employees left join tbl_department on tbl_employees.depid=tbl_department.depid left join tbl_company on tbl_employees.compid=tbl_company.compid;
+
+    b) right join : right join is used to join second table of right rows matched data with first table of right rows  if data matched join tables otherwise return null values.
+       
+         ex: select tbl_employees.*,depname,compname from tbl_employees right join tbl_department on tbl_employees.depid=tbl_department.depid right join tbl_company on tbl_employees.compid=tbl_company.compid;
+
+      
+
+    c) full join 
+        note : full join is not support mysql 
+
+
+d) cross join : cross join are used to join and return multiplicatuion of earch rows.
+
+              ex: select * from tbl_employees cross join tbl_department;
